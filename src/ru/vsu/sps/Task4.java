@@ -5,14 +5,14 @@ import java.util.Locale;
 import java.util.Scanner;
 
 // 29
-public class Task4 {
+public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
         Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Введите n: ");
         int n = scanner.nextInt();
         System.out.println(getNCountNum(n));
-
     }
 
     public static int getNCountNum(int n) {
@@ -20,35 +20,24 @@ public class Task4 {
 
         while (n > 0) {
             num += 1;
-            if (isNumDecreases(num) || isNumIncreases(num)) {
+            if (isNumIncreasesOrDecreases(num)) {
                 n -= 1;
             }
         }
         return num;
     }
 
-    public static boolean isNumIncreases(int num) {
-        int lastNum;
+    public static boolean isNumIncreasesOrDecreases(int num) {
+        int difference, lastDifference = 0;
 
-        while (num > 9) {
-            lastNum = num % 10;
-            num /= 10;
-            if (lastNum < num % 10) {
+        for (int i = num; i > 9; i /= 10) {
+            difference = i % 10 - i / 10 % 10;
+
+            if (difference == 0 || (difference < 0 && lastDifference > 0)
+                                || (difference > 0 && lastDifference < 0)) {
                 return false;
             }
-        }
-        return true;
-    }
-
-    public static boolean isNumDecreases(int num) {
-        int lastNum;
-
-        while (num > 9) {
-            lastNum = num % 10;
-            num /= 10;
-            if (lastNum > num % 10) {
-                return false;
-            }
+            lastDifference = difference;
         }
 
         return true;
