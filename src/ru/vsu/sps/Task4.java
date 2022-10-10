@@ -33,8 +33,8 @@ public class Main {
         for (int i = num; i > 9; i /= 10) {
             difference = i % 10 - i / 10 % 10;
 
-            if (difference == 0 || (difference < 0 && lastDifference > 0)
-                                || (difference > 0 && lastDifference < 0)) {
+            if (!(difference > 0 && lastDifference >= 0 ||
+                    difference < 0 && lastDifference <= 0) ) {
                 return false;
             }
             lastDifference = difference;
