@@ -27,7 +27,7 @@ public class Task5 {
         int distanceBetweenStars = (size - 4) / 3 + 1;
 
         if (y % distanceBetweenStars == 0) {
-            if (y / distanceBetweenStars % 3 == 0) {
+            if (y == 0 || y == size - 1) {
                 if (x >= distanceBetweenStars && x < size - distanceBetweenStars) {
                     if (x % distanceBetweenStars == 0) {
                         return '*';
@@ -44,8 +44,9 @@ public class Task5 {
                 }
             }
         }
-        else if ((y / distanceBetweenStars % 2 == 0 && (x == distanceBetweenStars || x == distanceBetweenStars * 2)) ||
-                ((x == 0 || x == size - 1) && y / distanceBetweenStars % 2 != 0)) {
+
+        else if ((y < distanceBetweenStars || y > distanceBetweenStars * 2)?
+                (x == distanceBetweenStars || x == distanceBetweenStars * 2) : (x == 0 || x == size - 1)) {
             return '|';
         }
         return ' ';
