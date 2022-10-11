@@ -1,6 +1,5 @@
 package ru.vsu.sps;
 
-
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,84 +9,45 @@ public class Task5 {
         Locale.setDefault(Locale.ROOT);
         Scanner scanner = new Scanner(System.in);
 
-        /*
-          0 1 2 3 4 5 6 7 8 9
-        0       * - - *
-        1       |     |
-        2       |     |
-        3 * - - *     * - - *
-        4 |                 |
-        5 |                 |
-        6 * - - *     * - - *
-        7       |     |
-        8       |     |
-        9       * - - *
-
-        */
-
         System.out.print("Введите s: ");
         int s = scanner.nextInt();
         printFigure(s);
     }
 
     public static void printFigure(int size) {
-        int linesCount = (size - 4) / 3;
-
         for (int i = 0; i < size; i++) {
-            if (i % (linesCount + 1) == 0) {
-                if (i / (linesCount + 1) % 3 == 0) {
+            for (int j = 0; j < size; j++) {
+                System.out.print(getChar(j, i, size));
+            }
+            System.out.println();
+        }
+    }
 
-                    for (int j = 0; j < size - linesCount - 1; j++) {
-                        if (j / (linesCount + 1) >= 1) {
-                            if (j % (linesCount + 1) == 0) {
-                                System.out.print('*');
-                            }
-                            else {
-                                System.out.print('-');
-                            }
-                        }
-                        else {
-                            System.out.print(' ');
-                        }
-                    }
-                }
-                else {
-                    for (int j = 0; j < size; j++) {
-                        if (j % (linesCount + 1) == 0) {
-                            System.out.print('*');
-                        }
-                        else if (j / (linesCount + 1) % 2 == 0) {
-                            System.out.print('-');
-                        }
-                        else {
-                            System.out.print(' ');
-                        }
+    public static char getChar(int x, int y, int size) {
+        int distanceBetweenStars = (size - 4) / 3 + 1;
+
+        if (y % distanceBetweenStars == 0) {
+            if (y / distanceBetweenStars % 3 == 0) {
+                if (x >= distanceBetweenStars && x < size - distanceBetweenStars) {
+                    if (x % distanceBetweenStars == 0) {
+                        return '*';
+                    } else {
+                        return '-';
                     }
                 }
             }
             else {
-                if (i / (linesCount + 1) % 2 == 0) {
-                    for (int j = 0; j < size - linesCount - 1; j++) {
-                        if (j % (linesCount + 1) == 0 && j > 0) {
-                            System.out.print('|');
-                        }
-                        else {
-                            System.out.print(' ');
-                        }
-                    }
-                }
-                else {
-                    for (int j = 0; j < size; j++) {
-                        if (j == 0 || j == size - 1) {
-                            System.out.print('|');
-                        }
-                        else {
-                            System.out.print(' ');
-                        }
-                    }
+                if (x % distanceBetweenStars == 0) {
+                    return '*';
+                } else if (x < distanceBetweenStars || x > distanceBetweenStars * 2) {
+                    return '-';
                 }
             }
-            System.out.println();
         }
+        else if ((y / distanceBetweenStars % 2 == 0 && (x == distanceBetweenStars || x == distanceBetweenStars * 2)) ||
+                ((x == 0 || x == size - 1) && y / distanceBetweenStars % 2 != 0)) {
+            return '|';
+        }
+        return ' ';
     }
 }
