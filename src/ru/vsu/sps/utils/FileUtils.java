@@ -10,7 +10,8 @@ public class FileUtils {
     }
 
     public static void writeStringToFile(Path filePath, String s) throws IOException {
-        if (!Files.exists(filePath)) {
+        if (Files.notExists(filePath)) {
+            Files.createDirectories(filePath.getParent());
             Files.createFile(filePath);
         }
         Files.writeString(filePath, s);
