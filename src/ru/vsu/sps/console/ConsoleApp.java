@@ -3,9 +3,11 @@ package ru.vsu.sps.console;
 import ru.vsu.sps.utils.ArrayUtils;
 import ru.vsu.sps.utils.FileUtils;
 import ru.vsu.sps.utils.SelectionSort;
+import ru.vsu.sps.utils.TaskLogic;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -16,15 +18,10 @@ public class ConsoleApp {
         try {
             InputArgs cmdArgs = InputArgs.fromCmdArgs(args);
 
-            int[][] arr = ArrayUtils.getArray2FromString(FileUtils.readFromFile(cmdArgs.inFile));
+            List<Integer> list = ArrayUtils.getListFromString(FileUtils.readFromFile(cmdArgs.inFile));
+            List<Integer> resultList = TaskLogic.createNewList(list);
 
-            if (!ArrayUtils.array2IsRectangular(arr)) {
-                throw new AssertionError("Array is not rectangular");
-            }
-
-            SelectionSort.sortColumns(arr);
-
-            FileUtils.writeStringToFile(cmdArgs.outFile, ArrayUtils.array2toString(arr));
+            FileUtils.writeStringToFile(cmdArgs.outFile, resultList.toString());
         } catch (InputArgsException|IOException|AssertionError e) {
             System.err.println(e.getMessage());
             System.exit(1);

@@ -11,7 +11,9 @@ public class FileUtils {
 
     public static void writeStringToFile(Path filePath, String s) throws IOException {
         if (Files.notExists(filePath)) {
-            Files.createDirectories(filePath.getParent());
+            if (filePath.getParent() != null) {
+                Files.createDirectories(filePath.getParent());
+            }
             Files.createFile(filePath);
         }
         Files.writeString(filePath, s);

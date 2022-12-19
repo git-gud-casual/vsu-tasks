@@ -1,5 +1,6 @@
 package ru.vsu.sps.utils;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -21,13 +22,19 @@ public class ArrayUtils {
         return arr;
     }
 
-    public static int[] getArrayFromString(String s) {
+    public static List<Integer> getListFromString(String s) {
         Scanner scanner = new Scanner(s);
 
         ArrayList<Integer> list = new ArrayList<>();
         while (scanner.hasNextInt()) {
             list.add(scanner.nextInt());
         }
+
+        return list;
+    }
+
+    public static int[] getArrayFromString(String s) {
+        List<Integer> list = getListFromString(s);
 
         int[] arr = new int[list.size()];
 
@@ -47,13 +54,19 @@ public class ArrayUtils {
         return true;
     }
 
+    public static String arrayToString(int[] arr) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int val : arr) {
+            stringBuilder.append(val);
+            stringBuilder.append('\t');
+        }
+        return stringBuilder.toString();
+    }
+
     public static String array2toString(int[][] arr) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int[] row : arr) {
-            for (int val : row) {
-                stringBuilder.append(val);
-                stringBuilder.append('\t');
-            }
+            stringBuilder.append(arrayToString(row));
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();
