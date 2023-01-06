@@ -3,10 +3,11 @@ package ru.vsu.sps.utils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class FileUtils {
     public static String readFromFile(Path filePath) throws IOException {
-        return Files.readString(filePath);
+        return String.join("\n", Files.readAllLines(filePath));
     }
 
     public static void writeStringToFile(Path filePath, String s) throws IOException {
@@ -16,6 +17,6 @@ public class FileUtils {
             }
             Files.createFile(filePath);
         }
-        Files.writeString(filePath, s);
+        Files.write(filePath, Arrays.asList(s.split("\n")));
     }
 }
