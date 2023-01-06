@@ -5,8 +5,8 @@ import ru.vsu.sps.gui.MainFrame;
 
 import java.util.Locale;
 
-// 10
-public class Task8 {
+// 16
+public class Task10 {
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
 

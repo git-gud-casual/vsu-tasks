@@ -5,21 +5,15 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ArrayUtils {
-    public static int[][] getArray2FromString(String s) {
+    public static List<List<Integer>> getList2FromString(String s) {
         Scanner scanner = new Scanner(s);
 
-        ArrayList<int[]> list = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            list.add(getArrayFromString(scanner.nextLine()));
+        ArrayList<List<Integer>> list = new ArrayList<>();
+        while (scanner.hasNextInt()) {
+            list.add(getListFromString(scanner.nextLine()));
         }
 
-        int[][] arr = new int[list.size()][];
-
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = list.get(i);
-        }
-
-        return arr;
+        return list;
     }
 
     public static List<Integer> getListFromString(String s) {
@@ -33,41 +27,20 @@ public class ArrayUtils {
         return list;
     }
 
-    public static int[] getArrayFromString(String s) {
-        List<Integer> list = getListFromString(s);
-
-        int[] arr = new int[list.size()];
-
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = list.get(i);
-        }
-
-        return arr;
-    }
-
-    public static boolean array2IsRectangular(int[][] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i].length != arr[i + 1].length) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static String arrayToString(int[] arr) {
+    public static String getStringFromList(List<Integer> list) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int val : arr) {
+        for (Integer val : list) {
             stringBuilder.append(val);
-            stringBuilder.append('\t');
         }
         return stringBuilder.toString();
     }
 
-    public static String array2toString(int[][] arr) {
+    public static String getStringFromList2(List<List<Integer>> list) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int[] row : arr) {
-            stringBuilder.append(arrayToString(row));
-            stringBuilder.append('\n');
+
+        for (List<Integer> val : list) {
+            stringBuilder.append(getStringFromList(val));
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }

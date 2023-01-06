@@ -1,12 +1,10 @@
 package ru.vsu.sps.console;
 
+import logic.TaskComparator;
 import ru.vsu.sps.utils.ArrayUtils;
 import ru.vsu.sps.utils.FileUtils;
-import ru.vsu.sps.utils.SelectionSort;
-import ru.vsu.sps.utils.TaskLogic;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,11 +16,11 @@ public class ConsoleApp {
         try {
             InputArgs cmdArgs = InputArgs.fromCmdArgs(args);
 
-            List<Integer> list = ArrayUtils.getListFromString(FileUtils.readFromFile(cmdArgs.inFile));
-            List<Integer> resultList = TaskLogic.createNewList(list);
+            List<List<Integer>> list = ArrayUtils.getList2FromString(FileUtils.readFromFile(cmdArgs.inFile));
+            list.sort(new TaskComparator());
 
-            FileUtils.writeStringToFile(cmdArgs.outFile, resultList.toString());
-        } catch (InputArgsException|IOException|AssertionError e) {
+            FileUtils.writeStringToFile(cmdArgs.outFile, ArrayUtils.getStringFromList2(list));
+        } catch (InputArgsException|IOException|IllegalArgumentException e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
