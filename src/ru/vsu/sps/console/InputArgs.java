@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class InputArgs {
+public class InputArgs {
     final Path inFile, outFile;
 
     public InputArgs(String inFile, String outFile) throws InputArgsException {
@@ -56,5 +56,13 @@ class InputArgs {
         else {
             return new InputArgs(inFile, outFile);
         }
+    }
+
+    public Path getInFile() {
+        return inFile;
+    }
+
+    public Path getOutFile() {
+        return outFile;
     }
 }
