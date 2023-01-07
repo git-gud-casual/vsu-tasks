@@ -35,25 +35,22 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
 
-        ActionListener btnEvent = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    JFileChooser fileChooser = new JFileChooser();
-                    fileChooser.setCurrentDirectory(new File("."));
-                    int response = fileChooser.showOpenDialog(null);
-                    if (response == JFileChooser.APPROVE_OPTION) {
-                        File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                        if (e.getSource() == loadInputFileBtn) {
-                            tableFromFilePath(file.toString());
-                        } else {
-                            saveToFilePath(file.toString());
-                        }
+        ActionListener btnEvent = e -> {
+            try {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("."));
+                int response = fileChooser.showOpenDialog(null);
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                    if (e.getSource() == loadInputFileBtn) {
+                        tableFromFilePath(file.toString());
+                    } else {
+                        saveToFilePath(file.toString());
                     }
                 }
-                catch (IOException exc) {
-                    JOptionPane.showMessageDialog(null, exc.toString());
-                }
+            }
+            catch (IOException exc) {
+                JOptionPane.showMessageDialog(null, exc.toString());
             }
         };
 
@@ -62,31 +59,28 @@ public class MainFrame extends JFrame {
             button.addActionListener(btnEvent);
         }
 
-        sortBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    List<List<Integer>> list = getList2FromTable();
+        sortBtn.addActionListener(e -> {
+            try {
+                List<List<Integer>> list = getList2FromTable();
 
-                    List<Triangle> trianglesList = new ArrayList<>();
-                    for (List<Integer> val : list) {
-                        Triangle triangle = Triangle.fromIntegerList(val);
-                        if (triangle.isExists()) {
-                            trianglesList.add(triangle);
-                        }
+                List<Triangle> trianglesList = new ArrayList<>();
+                for (List<Integer> val : list) {
+                    Triangle triangle = Triangle.fromIntegerList(val);
+                    if (triangle.isExists()) {
+                        trianglesList.add(triangle);
                     }
-                    trianglesList.sort(new TriangleComparator());
-
-                    list.clear();
-                    for (Triangle triangle : trianglesList) {
-                        list.add(triangle.asList());
-                    }
-
-                    fillTableByList(list);
                 }
-                catch (IllegalArgumentException exc) {
-                    JOptionPane.showMessageDialog(null, exc.toString());
+                trianglesList.sort(new TriangleComparator());
+
+                list.clear();
+                for (Triangle triangle : trianglesList) {
+                    list.add(triangle.asList());
                 }
+
+                fillTableByList(list);
+            }
+            catch (IllegalArgumentException exc) {
+                JOptionPane.showMessageDialog(null, exc.toString());
             }
         });
 
