@@ -1,6 +1,7 @@
 package ru.vsu.sps.gui;
 
-import logic.TaskComparator;
+import ru.vsu.sps.triangle.Triangle;
+import ru.vsu.sps.triangle.TriangleComparator;
 import ru.vsu.sps.utils.ArrayUtils;
 import ru.vsu.sps.utils.FileUtils;
 
@@ -66,7 +67,21 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     List<List<Integer>> list = getList2FromTable();
-                    list.sort(new TaskComparator());
+
+                    List<Triangle> trianglesList = new ArrayList<>();
+                    for (List<Integer> val : list) {
+                        Triangle triangle = Triangle.fromIntegerList(val);
+                        if (triangle.isExists()) {
+                            trianglesList.add(triangle);
+                        }
+                    }
+                    trianglesList.sort(new TriangleComparator());
+
+                    list.clear();
+                    for (Triangle triangle : trianglesList) {
+                        list.add(triangle.asList());
+                    }
+
                     fillTableByList(list);
                 }
                 catch (IllegalArgumentException exc) {
@@ -113,6 +128,9 @@ public class MainFrame extends JFrame {
 
             arrayTable.setModel(tableModel);
         }
+        else {
+            arrayTable.setModel(new DefaultTableModel());
+        }
     }
 
     private void tableFromFilePath(String filePath) throws IOException {
@@ -134,7 +152,7 @@ public class MainFrame extends JFrame {
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             list.add(new ArrayList<>());
             for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                list.get(i).add(Integer.valueOf((String)tableModel.getValueAt(i, j)));
+                list.get(i).add((Integer) tableModel.getValueAt(i, j));
             }
         }
         return list;

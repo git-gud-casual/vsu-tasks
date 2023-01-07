@@ -31,6 +31,7 @@ public class ArrayUtils {
         StringBuilder stringBuilder = new StringBuilder();
         for (Integer val : list) {
             stringBuilder.append(val);
+            stringBuilder.append('\t');
         }
         return stringBuilder.toString();
     }

@@ -17,7 +17,7 @@ public class Triangle {
     }
 
     static private final int intCountDefiningThreePoints = 6;
-    static public Triangle getTriangleFromIntegerList(List<Integer> list) {
+    static public Triangle fromIntegerList(List<Integer> list) {
         if (list.size() != intCountDefiningThreePoints) {
             throw new IllegalArgumentException("Integer list size should be 6");
         }
@@ -27,6 +27,16 @@ public class Triangle {
             pointsList.add(new Point(list.get(i), list.get(i + 1)));
         }
         return new Triangle(pointsList);
+    }
+
+    public boolean isExists() {
+        double abSide = a.getDistanceBetweenPoints(b);
+        double bcSide = b.getDistanceBetweenPoints(c);
+        double acSide = a.getDistanceBetweenPoints(c);
+
+        return abSide < bcSide + acSide &&
+                acSide < bcSide + abSide &&
+                bcSide < acSide + abSide;
     }
 
     public double getSquare() {
@@ -39,16 +49,6 @@ public class Triangle {
                 (halfPerimeter - abSide) *
                 (halfPerimeter - bcSide) *
                 (halfPerimeter - acSide));
-    }
-
-    public boolean isExists() {
-        double abSide = a.getDistanceBetweenPoints(b);
-        double bcSide = b.getDistanceBetweenPoints(c);
-        double acSide = a.getDistanceBetweenPoints(c);
-
-        return abSide < bcSide + acSide &&
-                acSide < bcSide + acSide &&
-                bcSide < acSide + abSide;
     }
 
     public List<Integer> asList() {

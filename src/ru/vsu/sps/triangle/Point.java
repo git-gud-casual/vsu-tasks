@@ -8,7 +8,7 @@ public class Point {
 
     public Point(int x, int y) {
         this.x = x;
-        this.y =y;
+        this.y = y;
     }
 
     public double getDistanceBetweenPoints(Point anotherPoint) {
