@@ -1,8 +1,8 @@
 package ru.vsu.sps.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class ArrayUtils {
     public static List<List<Integer>> getList2FromString(String s) {
