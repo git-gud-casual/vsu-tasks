@@ -20,7 +20,6 @@ public class Point {
         list.add(x);
         list.add(y);
         return list;
-
     }
 
     public int getX() {
