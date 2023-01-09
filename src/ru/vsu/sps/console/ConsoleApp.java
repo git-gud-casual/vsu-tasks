@@ -1,7 +1,7 @@
 package ru.vsu.sps.console;
 
 import ru.vsu.sps.triangle.Triangle;
-import ru.vsu.sps.triangle.TriangleComparator;
+import ru.vsu.sps.triangle.TriangleComparatorBySquare;
 import ru.vsu.sps.utils.ArrayUtils;
 import ru.vsu.sps.utils.FileUtils;
 
@@ -27,7 +27,7 @@ public class ConsoleApp {
                     trianglesList.add(triangle);
                 }
             }
-            trianglesList.sort(new TriangleComparator());
+            trianglesList.sort(new TriangleComparatorBySquare());
 
             list.clear();
             for (Triangle triangle : trianglesList) {

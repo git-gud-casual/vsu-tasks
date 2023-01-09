@@ -2,7 +2,7 @@ package ru.vsu.sps.triangle;
 
 import java.util.Comparator;
 
-public class TriangleComparator implements Comparator<Triangle> {
+public class TriangleComparatorBySquare implements Comparator<Triangle> {
     @Override
     public int compare(Triangle o1, Triangle o2) {
         double squaresDelta = o1.getSquare() - o2.getSquare();
