@@ -58,4 +58,17 @@ public class Triangle {
         return list;
     }
 
+    public int compare(Triangle anotherTriangle) {
+        double squaresDelta = getSquare() - anotherTriangle.getSquare();
+
+        if (Math.abs(squaresDelta) < 1e-6) {
+            return 0;
+        }
+        else if (squaresDelta > 0) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
 }
