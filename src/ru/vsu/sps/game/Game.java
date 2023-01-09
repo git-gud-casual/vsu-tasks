@@ -53,12 +53,12 @@ public class Game {
 
             moveRotationAreaByY(yOffset);
             moveRotationAreaByX(xOffset);
-            rotateAreaBy90Degrees(random.nextInt(3) + 1);
+            rotateArea(random.nextInt(3) + 1);
         }
         rotationAreaCoordinates = currentRotationAreaCoordinates;
     }
 
-    private void rotateAreaBy90Degrees(int times) {
+    private void rotateArea(int by90DegreesRotationCount) {
         int xOffset = rotationAreaCoordinates.getX();
         int yOffset = rotationAreaCoordinates.getY();
 
@@ -70,7 +70,7 @@ public class Game {
                 Point rightPoint = new Point(ROTATION_AREA_SIZE - 1 - i + xOffset, j + yOffset);
                 Point leftPoint = new Point(i + xOffset, ROTATION_AREA_SIZE - 1 - j + yOffset);
 
-                int rotateCount = times;
+                int rotateCount = by90DegreesRotationCount;
                 while (rotateCount-- > 0) {
                     int swap = board[topPoint.getY()][topPoint.getX()];
 
@@ -84,11 +84,11 @@ public class Game {
     }
 
     public void rotateLeft() {
-        rotateAreaBy90Degrees(3);
+        rotateArea(3);
     }
 
     public void rotateRight() {
-        rotateAreaBy90Degrees(1);
+        rotateArea(1);
     }
 
     private void moveRotationAreaByY(int yOffset) {
