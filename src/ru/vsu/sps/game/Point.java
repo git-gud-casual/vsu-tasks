@@ -8,6 +8,10 @@ public class Point {
         this.y = y;
     }
 
+    public Point(Point anotherPoint) {
+        this(anotherPoint.getX(), anotherPoint.getY());
+    }
+
     public int getX() {
         return x;
     }
