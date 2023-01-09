@@ -45,16 +45,16 @@ public class Text {
 
     public List<String> getSentences() {
         List<String> sentences = new ArrayList<>();
-        String text = this.text;
+        String s = this.text;
 
-        int sentenceBeginIndex = getFirstSentenceBeginIndex(text);
-        int sentenceEndIndex = getSentenceEndIndex(text, sentenceBeginIndex);
+        int sentenceBeginIndex = getFirstSentenceBeginIndex(s);
+        int sentenceEndIndex = getSentenceEndIndex(s, sentenceBeginIndex);
         while (sentenceEndIndex != -1 && sentenceBeginIndex != -1) {
-            sentences.add(text.substring(sentenceBeginIndex, sentenceEndIndex + 1));
+            sentences.add(s.substring(sentenceBeginIndex, sentenceEndIndex + 1));
 
-            text = text.substring(sentenceEndIndex);
-            sentenceBeginIndex = getFirstSentenceBeginIndex(text);
-            sentenceEndIndex = getSentenceEndIndex(text, sentenceBeginIndex);
+            s = s.substring(sentenceEndIndex);
+            sentenceBeginIndex = getFirstSentenceBeginIndex(s);
+            sentenceEndIndex = getSentenceEndIndex(s, sentenceBeginIndex);
         }
 
         return sentences;
