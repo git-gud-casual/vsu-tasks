@@ -9,7 +9,7 @@ import ru.vsu.sps.game.Point;
 
 public class RenderGameBoardPanel extends JPanel {
     public static final int CELL_SIZE = 100;
-    public static final int MARGIN = 50;
+    public static final int MARGIN = 25;
 
     private final Game game;
     private final Color[] usedColors = {Color.YELLOW, Color.RED, Color.ORANGE, Color.CYAN, Color.BLUE};
@@ -32,14 +32,14 @@ public class RenderGameBoardPanel extends JPanel {
     }
 
     private void render(Graphics graphics) {
-        int size = CELL_SIZE - MARGIN;
+        int size = CELL_SIZE - MARGIN * 2;
 
         for (int i = 0; i < Game.BOARD_SIZE; i++) {
             for (int j = 0; j < Game.BOARD_SIZE; j++) {
                 graphics.setColor(getColorByInt(game.getBoard()[i][j]));
 
-                int x = j * CELL_SIZE + MARGIN / 2;
-                int y = i * CELL_SIZE + MARGIN / 2;
+                int x = j * CELL_SIZE + MARGIN;
+                int y = i * CELL_SIZE + MARGIN;
 
                 if (shouldRenderRotateArea(j, i)) {
                     graphics.fillOval(x, y, size, size);
