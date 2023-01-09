@@ -145,7 +145,12 @@ public class MainFrame extends JFrame {
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             list.add(new ArrayList<>());
             for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                list.get(i).add((Integer) tableModel.getValueAt(i, j));
+                try {
+                    list.get(i).add((Integer) tableModel.getValueAt(i, j));
+                }
+                catch (Exception e) {
+                    list.get(i).add(0);
+                }
             }
         }
         return list;
